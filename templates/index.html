@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix - Movie Streaming</title>
+    <style>
+        body {
+            margin: 0;
+            background: #141414;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background: #080808;
+            padding: 22px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        h1 { color: #e50914; margin: 0; }
+
+        form { display: flex; gap: 8px; }
+
+        input, button {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+        }
+
+        button {
+            background: #e50914;
+            color: white;
+            cursor: pointer;
+        }
+
+        .hero {
+            padding: 55px 5%;
+            background: linear-gradient(90deg, #390707, #141414);
+        }
+
+        .hero h2 { font-size: 36px; }
+
+        .movies {
+            padding: 20px 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .movie {
+            background: #252525;
+            padding: 24px 16px;
+            border-radius: 8px;
+            min-height: 130px;
+            transition: transform 0.2s;
+        }
+
+        .movie:hover { transform: scale(1.04); }
+        .movie h3 { color: #ff4545; }
+        .genre { color: #ccc; }
+
+        footer {
+            padding: 25px;
+            text-align: center;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>NETFLIX</h1>
+        <form action="/" method="get">
+            <input type="text" name="search"
+                   placeholder="Search movies or genres"
+                   value="{{ search }}">
+            <button type="submit">Search</button>
+        </form>
+    </header>
+
+    <section class="hero">
+        <h2>Unlimited Movies & TV Shows</h2>
+        <p>Discover your next favorite show.</p>
+        <button onclick="document.getElementById('movies').scrollIntoView()">
+            Explore Movies
+        </button>
+    </section>
+
+    <h2 style="padding: 0 5%;">Popular on Netflix</h2>
+
+    <section class="movies" id="movies">
+        {% for movie in movies %}
+        <article class="movie">
+            <h3>{{ movie.title }}</h3>
+            <p class="genre">{{ movie.genre }}</p>
+            <button onclick="alert('You selected {{ movie.title }}')">
+                View Details
+            </button>
+        </article>
+        {% else %}
+        <p>No movies found. Try another search.</p>
+        {% endfor %}
+    </section>
+
+    <footer>
+        Netflix-style demo application built with Python Flask.
+    </footer>
+</body>
+</html>
